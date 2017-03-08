@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*h*h*h*h*h*harray": "cpp",
+        "*h*hinitializer_list": "cpp"
+    }
+}
