@@ -54,9 +54,18 @@ public:
             }
         }
 
+        if (closed_) {
+            return nullptr;
+        }
+
         auto item = queue_.front();
         queue_.pop();
         return item;
+    }
+
+    bool is_closed() const {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return closed_;
     }
 
     void close() {
@@ -70,7 +79,7 @@ public:
 private:
     bool closed_;
     std::condition_variable cond_;
-    std::mutex mutex_;
+    mutable std::mutex mutex_;
     std::queue<item_ptr_type> queue_;
 };
 
