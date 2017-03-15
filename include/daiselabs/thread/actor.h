@@ -27,11 +27,12 @@ public:
     actor(const actor&) = delete;
     actor &operator=(const actor&) = delete;
 
-    actor(const char *name, exec_function_type exec_function) :
-        name_(name), exec_function_(exec_function), timeout_millis_(-1), threads_(),
+    actor(const char *name) :
+        name_(name), exec_function_(), timeout_millis_(-1), threads_(),
         queue_(new Q()) {}
 
-    void activate(int thread_count = 1, int timeout_millis = -1) {
+    void activate(exec_function_type exec_function, int thread_count = 1, int timeout_millis = -1) {
+        exec_function_ = exec_function;
         timeout_millis_ = timeout_millis;
         for (int i = 0; i < thread_count; i++) {
             threads_.push_back(std::thread(&actor<Q>::thread_func, this));
