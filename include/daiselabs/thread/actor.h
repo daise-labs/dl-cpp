@@ -59,7 +59,15 @@ protected:
         bool terminated = false;
         while (!terminated) {
             msg_ptr_type t = queue_->get(timeout_millis_);
-            exec_function_(this, t);
+            
+            if (t != nullptr) {
+                exec_function_(this, t);
+            }
+            else {
+                // This means the queue has been closed,
+                // there for the thread must terminate
+                terminated = true;
+            }
         }
     }
 
