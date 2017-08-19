@@ -3,6 +3,8 @@
  *
  *  Created on: Feb 9, 2017
  *      Author: hynguyen@daise-labs.com
+ *
+ *  Copyright (c) Daise Labs 2017.  All rights reserved.
  */
 
 #ifndef DAISELABS_UTIL_BUFFER_H
